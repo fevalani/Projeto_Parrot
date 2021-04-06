@@ -18,6 +18,7 @@ body{
 
 .container{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 
     margin: 0 auto;
@@ -48,10 +49,12 @@ li img{
     height: 100px;
 }
 
-@media(maxwidth: 640px){
+@media(max-width: 640px){
     .titulo{
         font-size: 36px;
     }
 
-    
+    .container{
+        width: 117px;
+    }
 }
