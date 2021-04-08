@@ -6,13 +6,12 @@ let iguais = [];
 
 jogar();
 function jogar(){
-    /*while(qtd > 14 | qtd < 4){
+    while(qtd > 14 | qtd < 4){
         qtd = parseInt(prompt("Digite com quatas cartas quer jogar: "));
         if(qtd%2 !== 0){
             qtd = 0;
         }
-    }*/
-    qtd = 4;
+    }
     distribuirCartas();
 }
 
