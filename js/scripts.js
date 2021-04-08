@@ -1,4 +1,4 @@
-let qtd = 0;
+let qtd = 4;
 let jogadas = 0;
 let vitoria = 0;
 let iguais = [];
@@ -6,12 +6,12 @@ let iguais = [];
 
 jogar();
 function jogar(){
-    while(qtd > 14 | qtd < 4){
+    /*while(qtd > 14 | qtd < 4){
         qtd = parseInt(prompt("Digite com quatas cartas quer jogar: "));
         if(qtd%2 !== 0){
             qtd = 0;
         }
-    }
+    }*/
     distribuirCartas();
 }
 
@@ -110,6 +110,13 @@ function virarCarta(n){
     console.log(jogadas);
     if(vitoria === qtd/2){
     alert("Você venceu o jogo em " + jogadas + " jogadas!!!");
+    const novoJogo = prompt("Gostaria de jogar de novo?(sim/não)");
+    if(novoJogo === "sim"){
+        jogadas = 0;
+        iguais = [];
+        vitoria = 0;
+        jogar();
+    }
     }
 }
 
