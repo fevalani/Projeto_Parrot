@@ -1,5 +1,4 @@
 let qtd = 0;
-
 let jogadas = 0;
 let vitoria = 0;
 let iguais = [];
@@ -13,7 +12,7 @@ function jogar(){
             qtd = 0;
         }
     }*/
-    qtd = 14;
+    qtd = 4;
     distribuirCartas();
 }
 
@@ -41,6 +40,7 @@ function virarCarta(n){
     if(iguais.length < 2){
 
         n.classList.add('selecionado');
+        n.classList.add('back-face');
 
         if(n.classList.contains('carta0')){
             virar.setAttribute("src", "./imagens/bobrossparrot.gif");
@@ -85,17 +85,26 @@ function virarCarta(n){
         if(iguais[0].innerHTML === iguais[1].innerHTML){
             iguais[0].classList.remove('selecionado');
             iguais[1].classList.remove('selecionado');
+
             vitoria = vitoria + 1;
+            
             iguais = [];
+
         }else{
             iguais[0].classList.remove('selecionado');
             iguais[1].classList.remove('selecionado');
+
+            iguais[0].classList.remove('back-face');
+            iguais[1].classList.remove('back-face');
+
             iguais[0].setAttribute("onclick", "virarCarta(this)");
             iguais[1].setAttribute("onclick", "virarCarta(this)");
+
             const virarVolta = iguais[0].querySelector("img");
             virarVolta.setAttribute("src","./imagens/front.png");
             const voltar = iguais[1].querySelector("img");
             voltar.setAttribute("src","./imagens/front.png");
+
             iguais = [];
         }
     }
