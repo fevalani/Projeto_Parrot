@@ -3,6 +3,15 @@ let jogadas = 0;
 let vitoria = 0;
 let iguais = [];
 
+const imagens = [
+    "./imagens/bobrossparrot.gif",
+    "./imagens/explodyparrot.gif",
+    "./imagens/fiestaparrot.gif",
+    "./imagens/metalparrot.gif",
+    "./imagens/tripletsparrot.gif",
+    "./imagens/revertitparrot.gif",
+    "./imagens/unicornparrot.gif"];
+
 
 jogar();
 function jogar(){
@@ -36,15 +45,6 @@ function comparador(){
     return Math.random() - 0.5;
 }
 
-const imagens = [
-    "./imagens/bobrossparrot.gif",
-    "./imagens/explodyparrot.gif",
-    "./imagens/fiestaparrot.gif",
-    "./imagens/metalparrot.gif",
-    "./imagens/tripletsparrot.gif",
-    "./imagens/revertitparrot.gif",
-    "./imagens/unicornparrot.gif"];
-
 function virarCarta(n){
     const virar = n.querySelector("img");
 
@@ -55,6 +55,7 @@ function virarCarta(n){
 
         for (let i = 0; i < qtd/2; i++) {
             if(n.classList.contains('carta' + i)){
+
                 virar.setAttribute("src", imagens[i]);
                 n.removeAttribute("onclick");
                 jogadas = jogadas + 1;
@@ -81,31 +82,26 @@ function virarCarta(n){
         }else{
             setTimeout(desvira, 1000);
         }
+
     }
     
 
     console.log(vitoria);
     
     if(vitoria === qtd/2){
-        setTimeout(venceu, 500);
+        setTimeout(venceu, 100);
     }
 }
 
 function desvira(){
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
         iguais[i].classList.remove('selecionado');
         iguais[i].classList.remove('back-face');
         iguais[i].setAttribute("onclick", "virarCarta(this)");
         const virarVolta = iguais[i].querySelector("img");
         virarVolta.setAttribute("src","./imagens/front.png");  
     }
-
-    /*const virarVolta = iguais[0].querySelector("img");
-    virarVolta.setAttribute("src","./imagens/front.png");
-    const voltar = iguais[1].querySelector("img");
-    voltar.setAttribute("src","./imagens/front.png");*/
-
     iguais = [];
 }
 
