@@ -6,13 +6,15 @@ let iguais = [];
 
 jogar();
 function jogar(){
-    while(qtd > 14 | qtd < 4){
+    /*while(qtd > 14 || qtd < 4){
         qtd = parseInt(prompt("Digite com quatas cartas quer jogar: "));
         if(qtd%2 !== 0){
             qtd = 0;
         }
-    }
+    }*/
+    
     distribuirCartas();
+
 }
 
 function distribuirCartas(){
@@ -27,56 +29,42 @@ function distribuirCartas(){
 
     cartas.sort(comparador);
     distribuir.innerHTML = cartas.join("");
+
 }
 
 function comparador(){
     return Math.random() - 0.5;
 }
 
+const imagens = [
+    "./imagens/bobrossparrot.gif",
+    "./imagens/explodyparrot.gif",
+    "./imagens/fiestaparrot.gif",
+    "./imagens/metalparrot.gif",
+    "./imagens/tripletsparrot.gif",
+    "./imagens/revertitparrot.gif",
+    "./imagens/unicornparrot.gif"];
+
 function virarCarta(n){
     const virar = n.querySelector("img");
-    //start cronometro
 
     if(iguais.length < 2){
 
         n.classList.add('selecionado');
         n.classList.add('back-face');
 
-        if(n.classList.contains('carta0')){
-            virar.setAttribute("src", "./imagens/bobrossparrot.gif");
-            n.removeAttribute("onclick");
-            jogadas = jogadas + 1;
+        for (let i = 0; i < qtd/2; i++) {
+            if(n.classList.contains('carta' + i)){
+                virar.setAttribute("src", imagens[i]);
+                n.removeAttribute("onclick");
+                jogadas = jogadas + 1;
+            }
+            
         }
-        else if(n.classList.contains('carta1')){
-            virar.setAttribute("src", "./imagens/explodyparrot.gif");
-            n.removeAttribute("onclick");
-            jogadas = jogadas + 1;
-        }
-        else if(n.classList.contains('carta2')){
-            virar.setAttribute("src", "./imagens/fiestaparrot.gif");
-            n.removeAttribute("onclick");
-            jogadas = jogadas + 1;
-        }
-        else if(n.classList.contains('carta3')){
-            virar.setAttribute("src", "./imagens/metalparrot.gif");
-            n.removeAttribute("onclick");
-            jogadas = jogadas + 1;
-        }
-        else if(n.classList.contains('carta4')){
-            virar.setAttribute("src", "./imagens/tripletsparrot.gif");
-            n.removeAttribute("onclick");
-            jogadas = jogadas + 1;
-        }
-        else if(n.classList.contains('carta5')){
-            virar.setAttribute("src", "./imagens/revertitparrot.gif");
-            n.removeAttribute("onclick");
-            jogadas = jogadas + 1;
-        }
-        else if(n.classList.contains('carta6')){
-            virar.setAttribute("src", "./imagens/unicornparrot.gif");
-            n.removeAttribute("onclick");
-            jogadas = jogadas + 1;
-        }
+    }
+
+    if(jogadas == 1){
+        timer = setInterval(alteraNumero, 1000);
     }
 
     iguais = document.querySelectorAll(".selecionado");
@@ -91,34 +79,65 @@ function virarCarta(n){
             iguais = [];
 
         }else{
-            iguais[0].classList.remove('selecionado');
-            iguais[1].classList.remove('selecionado');
-
-            iguais[0].classList.remove('back-face');
-            iguais[1].classList.remove('back-face');
-
-            iguais[0].setAttribute("onclick", "virarCarta(this)");
-            iguais[1].setAttribute("onclick", "virarCarta(this)");
-
-            const virarVolta = iguais[0].querySelector("img");
-            virarVolta.setAttribute("src","./imagens/front.png");
-            const voltar = iguais[1].querySelector("img");
-            voltar.setAttribute("src","./imagens/front.png");
-
-            iguais = [];
+            setTimeout(desvira, 1000);
         }
     }
-    console.log(jogadas);
+    
+
+    console.log(vitoria);
+    
     if(vitoria === qtd/2){
-        //para o cronometro
-        alert("Você venceu o jogo em " + jogadas + " jogadas em " + + "segundos");
-        const novoJogo = prompt("Gostaria de jogar de novo?(sim/não)");
-        if(novoJogo === "sim"){
-            jogadas = 0;
-            iguais = [];
-            vitoria = 0;
-            jogar();
-        }
+        setTimeout(venceu, 500);
     }
 }
 
+function desvira(){
+
+    for (let i = 0; i < 3; i++) {
+        iguais[i].classList.remove('selecionado');
+        iguais[i].classList.remove('back-face');
+        iguais[i].setAttribute("onclick", "virarCarta(this)");
+        const virarVolta = iguais[i].querySelector("img");
+        virarVolta.setAttribute("src","./imagens/front.png");  
+    }
+
+    /*const virarVolta = iguais[0].querySelector("img");
+    virarVolta.setAttribute("src","./imagens/front.png");
+    const voltar = iguais[1].querySelector("img");
+    voltar.setAttribute("src","./imagens/front.png");*/
+
+    iguais = [];
+}
+
+function venceu(){
+    const minutos = document.querySelector(".min");
+    const segundos = document.querySelector(".seg");
+
+    clearInterval(timer);
+
+    if(minutos.innerHTML !== "00"){
+        alert("Você venceu o jogo em " + jogadas + " jogadas em " + minutos.innerHTML + "minutos e " + segundos.innerHTML + " segundos");
+    }else{
+        alert("Você venceu o jogo em " + jogadas + " jogadas em " + segundos.innerHTML + " segundos");
+    }
+    const novoJogo = prompt("Gostaria de jogar de novo?(sim/não)");
+    if(novoJogo === "sim"){
+        minutos.innerHTML = 0;
+        segundos.innerHTML = 0;
+        jogadas = 0;
+        iguais = [];
+        vitoria = 0;
+        jogar();
+    }
+}
+
+function alteraNumero(){
+    const minutos = document.querySelector(".min");
+    const segundos = document.querySelector(".seg");
+    segundos.innerHTML ++;
+    if(segundos.innerHTML == 60){
+        minutos.innerHTML += 1;
+        segundos.innerHTML = 00;
+    }
+
+}
