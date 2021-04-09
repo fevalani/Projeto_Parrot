@@ -1,4 +1,4 @@
-let qtd = 4;
+let qtd = 0;
 let jogadas = 0;
 let vitoria = 0;
 let iguais = [];
@@ -16,12 +16,12 @@ const imagens = [
 
 jogar();
 function jogar(){
-    /*while(qtd > 14 || qtd < 4){
+    while(qtd > 14 || qtd < 4){
         qtd = parseInt(prompt("Digite com quatas cartas quer jogar: "));
         if(qtd%2 !== 0){
             qtd = 0;
         }
-    }*/
+    }
     
     distribuirCartas();
 
@@ -117,7 +117,7 @@ function venceu(){
     clearInterval(timer);
 
     if(minutos.innerHTML !== "0"){
-        alert("Você venceu o jogo em " + jogadas + " jogadas em " + minutos.innerHTML + "minutos e " + segundos.innerHTML + " segundos");
+        alert("Você venceu o jogo em " + jogadas + " jogadas em " + minutos.innerHTML + " minuto(s) e " + segundos.innerHTML + " segundos");
     }else{
         alert("Você venceu o jogo em " + jogadas + " jogadas em " + segundos.innerHTML + " segundos");
     }
@@ -128,6 +128,7 @@ function venceu(){
         jogadas = 0;
         iguais = [];
         vitoria = 0;
+        qtd = 0;
         jogar();
     }
 }
