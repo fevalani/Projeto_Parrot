@@ -17,7 +17,7 @@ const imagens = [
 jogar();
 function jogar(){
     while(qtd > 14 || qtd < 4){
-        qtd = parseInt(prompt("Digite com quatas cartas quer jogar: "));
+        qtd = parseInt(prompt("Digite com quantas cartas quer jogar: "));
         if(qtd%2 !== 0){
             qtd = 0;
         }
