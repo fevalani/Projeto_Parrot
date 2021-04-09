@@ -2,6 +2,7 @@ let qtd = 4;
 let jogadas = 0;
 let vitoria = 0;
 let iguais = [];
+let bloqueio = 1;
 
 const imagens = [
     "./imagens/bobrossparrot.gif",
@@ -37,6 +38,7 @@ function distribuirCartas(){
     }
 
     cartas.sort(comparador);
+    imagens.sort(comparador);
     distribuir.innerHTML = cartas.join("");
 
 }
@@ -45,51 +47,53 @@ function comparador(){
     return Math.random() - 0.5;
 }
 
+
 function virarCarta(n){
-    const virar = n.querySelector("img");
+    if(bloqueio === 1){
+        const virar = n.querySelector("img");
 
-    if(iguais.length < 2){
+        if(iguais.length < 2){
 
-        n.classList.add('selecionado');
-        n.classList.add('back-face');
+            n.classList.add('selecionado');
+            n.classList.add('back-face');
 
-        for (let i = 0; i < qtd/2; i++) {
-            if(n.classList.contains('carta' + i)){
+            for (let i = 0; i < qtd/2; i++) {
+                if(n.classList.contains('carta' + i)){
 
-                virar.setAttribute("src", imagens[i]);
-                n.removeAttribute("onclick");
-                jogadas = jogadas + 1;
+                    virar.setAttribute("src", imagens[i]);
+                    n.removeAttribute("onclick");
+                    jogadas = jogadas + 1;
+                }
+                
+            }
+        }
+
+        if(jogadas == 1){
+            timer = setInterval(alteraNumero, 1000);
+        }
+
+        iguais = document.querySelectorAll(".selecionado");
+
+        if(iguais.length === 2){
+            bloqueio = 0;
+            if(iguais[0].innerHTML === iguais[1].innerHTML){
+                iguais[0].classList.remove('selecionado');
+                iguais[1].classList.remove('selecionado');
+
+                vitoria = vitoria + 1;
+                
+                iguais = [];
+                bloqueio = 1;
+
+            }else{
+                setTimeout(desvira, 1000);
             }
             
         }
-    }
-
-    if(jogadas == 1){
-        timer = setInterval(alteraNumero, 1000);
-    }
-
-    iguais = document.querySelectorAll(".selecionado");
-
-    if(iguais.length === 2){
-        if(iguais[0].innerHTML === iguais[1].innerHTML){
-            iguais[0].classList.remove('selecionado');
-            iguais[1].classList.remove('selecionado');
-
-            vitoria = vitoria + 1;
-            
-            iguais = [];
-
-        }else{
-            setTimeout(desvira, 1000);
+        
+        if(vitoria === qtd/2){
+            setTimeout(venceu, 100);
         }
-
-    }
-    
-
-    console.log(vitoria);
-    
-    if(vitoria === qtd/2){
-        setTimeout(venceu, 100);
     }
 }
 
@@ -103,6 +107,7 @@ function desvira(){
         virarVolta.setAttribute("src","./imagens/front.png");  
     }
     iguais = [];
+    bloqueio = 1;
 }
 
 function venceu(){
@@ -111,7 +116,7 @@ function venceu(){
 
     clearInterval(timer);
 
-    if(minutos.innerHTML !== "00"){
+    if(minutos.innerHTML !== "0"){
         alert("Você venceu o jogo em " + jogadas + " jogadas em " + minutos.innerHTML + "minutos e " + segundos.innerHTML + " segundos");
     }else{
         alert("Você venceu o jogo em " + jogadas + " jogadas em " + segundos.innerHTML + " segundos");
@@ -132,8 +137,8 @@ function alteraNumero(){
     const segundos = document.querySelector(".seg");
     segundos.innerHTML ++;
     if(segundos.innerHTML == 60){
-        minutos.innerHTML += 1;
-        segundos.innerHTML = 00;
+        minutos.innerHTML ++;
+        segundos.innerHTML = 0;
     }
 
 }
