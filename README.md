@@ -50,7 +50,7 @@ Seu segundo projeto com JavaScript será a implementação do jogo Parrot Card G
 
 O layout da aplicação se encontra no Figma:
 
-<a href="https://www.figma.com/file/G9eTcwdxrRrKOfyfYCj3l7/Projeto_Parrot?node-id=0%3A1">
+<a href="https://www.figma.com/file/EBizkrjH73Ku9fmib49Hlm/Parrot-Card-Game?node-id=0%3A1">
   <img alt="Project Figma" src="https://img.shields.io/badge/%20Layout%20-Figma-%2304D361?style=for-the-badge&logo=appveyor">
 </a>
 
