@@ -80,7 +80,7 @@ Foram usadas as seguintes ferramentas para o desenvolvimento do projeto:
 
 #### **Utilities**
 
-- Prototype: **[Figma](https://www.figma.com/)** → **[Protótipo (FoodCamp)](https://www.figma.com/file/G9eTcwdxrRrKOfyfYCj3l7/FoodCamp?node-id=0%3A1)**
+- Prototype: **[Figma](https://www.figma.com/)** → **[Protótipo (Parrot-Card-Game)](https://www.figma.com/file/EBizkrjH73Ku9fmib49Hlm/Parrot-Card-Game?node-id=0%3A1)**
 - Editor: **[Visual Studio Code](https://code.visualstudio.com/)**
 - Fonts: **[Roboto](https://fonts.google.com/specimen/Roboto)**
 
